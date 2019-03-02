@@ -1,0 +1,8 @@
+*~
+**/turingarena-files
+**/input
+**/output
+*.aux
+*.log
+*.pyc
+
