@@ -109,10 +109,14 @@ def test_case(m,n):
         construction_ok = True
         posed_tiles = 0
         covered = [ [False for _ in range(n+1) ] for _ in range(m+1) ]
+        lista_tiles = []
         def place_tile(row,col,dir):
             nonlocal construction_ok
             nonlocal posed_tiles
             nonlocal covered
+            nonlocal lista_tiles
+            lista_tiles.append((row,col,dir))
+            posed_tiles += 1
             if dir == H:
                 cells = [ [row,col], [row,col+1], [row,col+2], [row+1,col], [row+1,col+1], [row+1,col+2] ]
             else:    
@@ -145,7 +149,9 @@ def test_case(m,n):
                 else:
                     print(f"NO: non hai ricoperto l'intera griglia ({m},{n}). Hai collocato solo {posed_tiles} tessere. Di positivo: non sei uscito dalla griglia ({m},{n}) e non hai sovrapposto tessere. Nessun conflitto.")
                     turn_off_construction_goal_flags(m,n)
+                print("[vuoi vedere come la tua procedura ha collocato le piastrelle? File esterni da scaricare: visualizzazione statica in grafica vettoriale e ASCII solo log delle piastelle da usare per debug e visualizzabile in un'applet]")
             else:
+                print("mostra il packing fino all'errore: ", lista_tiles)
                 turn_off_construction_goal_flags(m,n)
 
                 
