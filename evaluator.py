@@ -49,11 +49,8 @@ def offer_a_tiling(m,n):
     #
     #  da progettare anche la forma della rappresentazione più opportuna del tiling in memoria per facilitare la traduzione visuale. Per l'idea astratta del tiling si può avvalersi invece della soluzione del problema nella cartella solutions (in futuro, con l'esperienza in classe, capiremo se non sia opportuno oscurarla offrendo tiling meno regolari e più caotici. Anche per questo è bene separare le varie fasi che portano a renderizzare l'idea del tiling (l'oggetto combinatorico), entro un file di ASCIIART).
 """
-    
-    path = os.path.join(ta.get_temp_dir(), "output.txt")
-    with open(path, "w") as f:
-        print(tiling, file=f)    
-        ta.evallib.evaluation.send_file(path, filename=f"tiling_{num_offered_tilings}.txt")
+
+    ta.send_file(tiling, filename=f"tiling_{num_offered_tilings}.txt")
 
 
 
