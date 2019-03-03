@@ -1,15 +1,61 @@
 import turingarena as ta
+import os
 
 H = 0   # horizontal placement of a tile (2 rows, 3 cols)
 V = 1   # vertical placement of a tile (3 rows, 2 cols)
 
-i_file_generated = 0
+num_offered_tilings = 0
 def offer_a_tiling(m,n):
-    global i_file_generated
-    i_file_generated += 1
-    tiling="ciao mamma"
-#    ta.send_file(tiling, filename=f"tiling_{i_file_generated}.txt")
-#    ta.evallib.evaluation.send_file_as_path(tiling, filename=f"tiling_{i_file_generated}.txt")
+    global num_offered_tilings
+    num_offered_tilings += 1
+
+    # run with:
+    # turingarena-dev evaluate --store-files solutions/solution.py
+    # salva i file nella directory generated-files
+
+    print(f"Ho messo un tiling della griglia ({m},{n}) nel file  generated-files/tiling_{num_offered_tilings}.txt")
+    tiling=f"In questo file di testo (file ASCII) trovi un tiling della griglia ({m},{n}):"
+
+    tiling +="""
+    
+    # TO BE DONE: la composizione di questo file
+    # aggiungere righe al file.
+    # conviene crearsi descrizione opportuna del tiling in memoria, entro matrici, e poi renderizzare queste in stringa per mezzo di caratteri ASCII opportuni:
+    # va studiato anche lo schema con cui realizzare tegole (di più caratteri), mi pare che le ratio 3/5 e 3/4 approssimino bene, tipo:
+    #     XXXXX     XXXX     
+    #     X   X     X  X     sembrano entrambe abbastanza quadrati (non saprei dire quale di più)
+    #     XXXXX     XXXX
+    #
+    #     e quindi, se ad esempio scegli la 3/4:
+    #
+    #     XXXXXXXXXXXX
+    #     X          X
+    #     X__________X    per la (2,3) orizzontale
+    #     X          X
+    #     X          X
+    #     XXXXXXXXXXXX
+    #
+    #     XXXXXXXX
+    #     X      X
+    #     X______X        per la (3,2) verticale
+    #     X      X
+    #     X      X
+    #     X______X
+    #     X      X
+    #     X      X
+    #     XXXXXXXX
+    #
+    #  ma ovviamente va fatto un studio più attento sui caratteri ASCII da adottare e questo può influire sui rapporti e geometrie. E' importante presatare sempre attenzione che poi se ne metto di orizzontali e di verticali si incastrino, ossia il numero totale di caratteri in verticale di una (2,3) deve essere i 3/2 dei caratteri in verticale di una (3,2), ed allo stesso modo devono tornare i rapporti sulla larghezza orizzontale in caratteri. 
+    #
+    #  da progettare anche la forma della rappresentazione più opportuna del tiling in memoria per facilitare la traduzione visuale. Per l'idea astratta del tiling si può avvalersi invece della soluzione del problema nella cartella solutions (in futuro, con l'esperienza in classe, capiremo se non sia opportuno oscurarla offrendo tiling meno regolari e più caotici. Anche per questo è bene separare le varie fasi che portano a renderizzare l'idea del tiling (l'oggetto combinatorico), entro un file di ASCIIART).
+"""
+    
+    path = os.path.join(ta.get_temp_dir(), "output.txt")
+    with open(path, "w") as f:
+        print(tiling, file=f)    
+        ta.evallib.evaluation.send_file(path, filename=f"tiling_{num_offered_tilings}.txt")
+
+
 
 
 def test_case(m,n):
@@ -128,3 +174,6 @@ ta.goals.setdefault("construction", True)
 
 print(ta.goals)
 
+
+offer_a_tiling(3,4)
+offer_a_tiling(6,5)
