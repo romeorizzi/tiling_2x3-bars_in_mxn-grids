@@ -108,12 +108,11 @@ def test_case(m,n):
         print(f"Ok, you claim the tiling exists, and ({m},{n}) <= (100,100). Let's hence see if you can actually construct the tiling.")
         construction_ok = True
         posed_tiles = 0
-        covered = [ [False for _ in range(n) ] for _ in range(m) ]
+        covered = [ [False for _ in range(n+1) ] for _ in range(m+1) ]
         def place_tile(row,col,dir):
             nonlocal construction_ok
             nonlocal posed_tiles
             nonlocal covered
-            row, col = row - 1, col - 1
             if dir == H:
                 cells = [ [row,col], [row,col+1], [row,col+2], [row+1,col], [row+1,col+1], [row+1,col+2] ]
             else:    
@@ -122,7 +121,7 @@ def test_case(m,n):
             for cell in cells:
                 row = cell[0]
                 col = cell[1]
-                if row < 0 or col < 0 or row >= m or col >= n:
+                if row < 1 or col < 1 or row > m or col > n:
                     print(f"La tua tessera fuoriesce dalla scacchiera nella cella ({row},{col}).")
                     construction_ok = False
                     return
