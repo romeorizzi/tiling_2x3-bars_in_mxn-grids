@@ -118,7 +118,6 @@ def test_case(m,n):
                 cells = [ [row,col], [row,col+1], [row,col+2], [row+1,col], [row+1,col+1], [row+1,col+2] ]
             else:    
                 cells = [ [row,col], [row+1,col], [row+2,col], [row,col+1], [row+1,col+1], [row+2,col+1] ]
-            posed_tiles += 1
             for cell in cells:
                 row = cell[0]
                 col = cell[1]
@@ -142,14 +141,14 @@ def test_case(m,n):
         else:
             if construction_ok:
                 if 6*posed_tiles == m*n:
-                    print(f"Complimenti! Hai riempito perfettamente la griglia ({m},{n}). Il tuo tiling è corretto.")
+                    print(f"Complimenti! Hai trovato un tiling perfetto della griglia ({m},{n}). Questo è ovviamente ottimo senza ricorrere ad argomenti più fini e linguaggi di NO più misteriosi.")
                 else:
-                    print(f"NO: non hai ricoperto l'intera griglia ({m},{n}). Hai collocato solo {posed_tiles} tessere. Di positivo: non sei uscito dalla griglia ({m},{n}) e non hai sovrapposto tessere. Nessun conflitto.")
-                    turn_off_construction_goal_flags(m,n)
+                    print(f"Hai fornito un packing corretto ma esso non è un tiling perfetto quindi non mi è ovvio esso sia ottimo. Per ora mi hai convinto che esista un tiling di almeno {posed_tiles}, ossia mi hai dato un lower-bound sul valore ottimo del tiling. In esercizi successivi di questo percorso apprenderai come fornire argomenti a supporto dell'ottimalità dei tuoi packing e andiamo a vedere quanto è buono l'upper-bound che sai fornirmi. Tuttavia in questo caso (m={m} e n={n}) esiste un tiling ottimo. Quindi prendiamo per NON buono il packing che hai qui prodotto.")
+                turn_off_construction_goal_flags(m,n)
                 print("[vuoi vedere come la tua procedura ha collocato le piastrelle? File esterni da scaricare: visualizzazione statica in grafica vettoriale e ASCII solo log delle piastelle da usare per debug e visualizzabile in un'applet]")
             else:
-                print("mostra il packing fino all'errore: ", lista_tiles)
                 turn_off_construction_goal_flags(m,n)
+                print("mostra il packing fino all'errore: ", lista_tiles)
 
                 
 def run_all_test_cases():
